@@ -9,14 +9,7 @@ describe('styled-jsx-plugin-postcss', () => {
     )
   })
 
-  it('works with "styled-jsx-expression" placeholders', () => {
-    assert.equal(
-      plugin('p { img { display: block } color: %%styled-jsx-expression-0%%; } %%styled-jsx-expression-1%%'),
-      'p { color: %%styled-jsx-expression-0%%; } p img { display: block } %%styled-jsx-expression-1%%'
-    )
-  })
-
-  it('works with "styled-jsx-placeholder" placeholders', () => {
+  it('works with placeholders', () => {
     assert.equal(
       plugin('p { img { display: block } color: %%styled-jsx-placeholder-0%%; } %%styled-jsx-placeholder-1%%'),
       'p { color: %%styled-jsx-placeholder-0%%; } p img { display: block } %%styled-jsx-placeholder-1%%'
