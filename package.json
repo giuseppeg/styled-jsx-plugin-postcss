@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/giuseppeg/styled-jsx-plugin-postcss#readme",
   "dependencies": {
-    "deasync": "^0.1.10",
+    "deasync": "^0.1.12",
     "postcss": "^6.0.13",
     "postcss-load-plugins": "^2.3.0"
   },
