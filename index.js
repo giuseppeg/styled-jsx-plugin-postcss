@@ -2,10 +2,7 @@ const loopWhile = require('deasync').loopWhile
 const processor = require('./processor')
 
 module.exports = (css, settings) => {
-  const cssWithPlaceholders = css
-    .replace(/%%styled-jsx-placeholder-(\d+)%%/g, (_, id) =>
-      `/*%%styled-jsx-placeholder-${id}%%*/`
-    )
+  const cssWithPlaceholders = css.replace(/%%(styled-jsx-placeholder-\d+)%%/g, '_$1_')
   let processedCss
   let wait = true
 
@@ -23,8 +20,5 @@ module.exports = (css, settings) => {
     throw processedCss
   }
 
-  return processedCss
-    .replace(/\/\*%%styled-jsx-placeholder-(\d+)%%\*\//g, (_, id) =>
-      `%%styled-jsx-placeholder-${id}%%`
-    )
+  return processedCss.replace(/_(styled-jsx-placeholder-\d+)_/g, '%%$1%%')
 }
