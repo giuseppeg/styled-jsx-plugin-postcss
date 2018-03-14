@@ -22,7 +22,7 @@ function processor(src, options) {
       if (!_processor) {
         _processor = postcss(plugins)
       }
-      return _processor.process(src)
+      return _processor.process(src, { from: false })
     })
     .then(result => result.css)
 }
