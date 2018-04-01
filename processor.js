@@ -9,7 +9,7 @@ function processor(src, options) {
 
   let loaderPromise
   if (!plugins) {
-    loaderPromise = loader(options.env || process.env)
+    loaderPromise = loader(options.env || process.env, null, { argv: false })
       .then(pluginsInfo => {
         plugins = pluginsInfo.plugins || []
       })
@@ -22,7 +22,7 @@ function processor(src, options) {
       if (!_processor) {
         _processor = postcss(plugins)
       }
-      return _processor.process(src)
+      return _processor.process(src, { from: false })
     })
     .then(result => result.css)
 }
