@@ -2,17 +2,20 @@ const assert = require('assert')
 const plugin = require('./')
 
 describe('styled-jsx-plugin-postcss', () => {
-  it('applies plugins', () => {
+  it('applies browser list and preset-env features', () => {
     assert.equal(
-      plugin('p { img { display: block} color: color(red a(90%)) }'),
-      'p { color: rgba(255, 0, 0, 0.9); } p img { display: block}'
+      plugin('p { color: color-mod(red alpha(90%)); & img { display: block } }'),
+      'p { color: rgba(255, 0, 0, 0.9) }\np img { display: block }'
     )
+  })
+
+  it('applies plugins', () => {
+    assert.equal(plugin('p { background-colour: grey; }'), 'p { background-color: gray; }')
   })
 
   it('works with placeholders', () => {
     assert.equal(
-      plugin('p { img { display: block } color: %%styled-jsx-placeholder-0%%; } %%styled-jsx-placeholder-1%%'),
-      'p { color: %%styled-jsx-placeholder-0%%; } p img { display: block } %%styled-jsx-placeholder-1%%'
+      plugin('p { color: %%styled-jsx-placeholder-0%%; & img { display: block; } } %%styled-jsx-placeholder-1%%'), 'p { color: %%styled-jsx-placeholder-0%% } p img { display: block; } %%styled-jsx-placeholder-1%%'
     )
   })
 

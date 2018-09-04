@@ -22,14 +22,15 @@
   },
   "homepage": "https://github.com/giuseppeg/styled-jsx-plugin-postcss#readme",
   "dependencies": {
-    "deasync": "^0.1.12",
-    "postcss": "^6.0.13",
+    "deasync": "^0.1.13",
+    "postcss": "^7.0.2",
     "postcss-load-plugins": "^2.3.0"
   },
   "devDependencies": {
     "mocha": "^4.0.1",
-    "postcss-cssnext": "^3.0.2",
     "postcss-easy-import": "^3.0.0",
-    "postcss-nested": "^2.1.2"
+    "postcss-nested": "^3.0.0",
+    "postcss-preset-env": "^5.3.0",
+    "postcss-spiffing": "^0.1.0"
   }
 }
