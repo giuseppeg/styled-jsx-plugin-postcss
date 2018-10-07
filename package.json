@@ -27,10 +27,10 @@
     "postcss-load-plugins": "^2.3.0"
   },
   "devDependencies": {
-    "mocha": "^4.0.1",
+    "mocha": "^5.2.0",
     "postcss-easy-import": "^3.0.0",
-    "postcss-nested": "^3.0.0",
-    "postcss-preset-env": "^5.3.0",
+    "postcss-nested": "^4.1.0",
+    "postcss-preset-env": "^6.0.10",
     "postcss-spiffing": "^0.1.0"
   }
 }
