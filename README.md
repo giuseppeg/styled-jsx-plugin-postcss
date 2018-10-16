@@ -8,12 +8,10 @@ Use [PostCSS](https://github.com/postcss/postcss) with
 
 ## Usage
 
-_Note that Next.js supports PostCSS out of the box, so you do not need this plug-in is using Next_.
-
-Install this package and also `styled-jsx` first.
+Install this package first.
 
 ```bash
-npm install --save styled-jsx styled-jsx-plugin-postcss
+npm install --save styled-jsx-plugin-postcss
 ```
 
 Next, add `styled-jsx-plugin-postcss` to the `styled-jsx`'s `plugins` in your
