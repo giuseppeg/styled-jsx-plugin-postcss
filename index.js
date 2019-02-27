@@ -14,7 +14,7 @@ module.exports = (css, settings) => {
     wait = false
   }
 
-  processor(cssWithPlaceholders)
+  processor(cssWithPlaceholders, settings)
     .then(resolved)
     .catch(resolved)
   loopWhile(() => wait)
