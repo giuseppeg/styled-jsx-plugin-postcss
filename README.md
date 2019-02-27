@@ -31,12 +31,12 @@ With config:
 {
   "plugins": [
     ["styled-jsx/babel", {
-      plugins: [
+      "plugins": [
         [
-          'styled-jsx-plugin-postcss',
+          "styled-jsx-plugin-postcss",
           {
-            path:
-              '[PATH_PREFIX]/postcss.config.js'
+            "path":
+              "[PATH_PREFIX]/postcss.config.js"
           }
         ]
       ] 
