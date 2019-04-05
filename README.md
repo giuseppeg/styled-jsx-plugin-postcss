@@ -25,6 +25,26 @@ babel configuration:
 }
 ```
 
+With config:
+
+```json
+{
+  "plugins": [
+    ["styled-jsx/babel", {
+      "plugins": [
+        [
+          "styled-jsx-plugin-postcss",
+          {
+            "path":
+              "[PATH_PREFIX]/postcss.config.js"
+          }
+        ]
+      ] 
+    }]
+  ]
+}
+```
+
 ### Example with CRA
 
 Usage with Create React App requires you to either _eject_ or use [react-app-rewired](https://github.com/timarney/react-app-rewired). 

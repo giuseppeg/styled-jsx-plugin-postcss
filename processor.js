@@ -9,7 +9,7 @@ function processor(src, options) {
 
   let loaderPromise
   if (!plugins) {
-    loaderPromise = loader(options.env || process.env, null, { argv: false })
+    loaderPromise = loader(options.env || process.env, options.path, { argv: false })
       .then(pluginsInfo => {
         plugins = pluginsInfo.plugins || []
       })
