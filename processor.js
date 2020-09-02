@@ -6,7 +6,6 @@ let _processor
 
 function processor(src, options) {
   options = options || {}
-
   let loaderPromise
   if (!plugins) {
     loaderPromise = loader(options.env || process.env, options.path, { argv: false })
@@ -27,4 +26,19 @@ function processor(src, options) {
     .then(result => result.css)
 }
 
-module.exports = processor
+function jsonParse(str) {
+  try {
+      return JSON.parse(str);
+  } catch (e) {
+      return str;
+  }
+}
+
+const args = process.argv.slice(2)
+const src = args[0]
+const options = jsonParse(args[1])
+processor(src, options).then(function(result){
+  console.log(result)
+})
+
+// module.exports = processor
