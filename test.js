@@ -26,4 +26,14 @@ describe('styled-jsx-plugin-postcss', () => {
       'div { color: red; } p { color: red }'
     )
   })
+
+  it("works with quotes and other characters", () => {
+    assert.equal(
+      plugin(`@import "./fixture.css"; * { color: red; font-family: 'Times New Roman'; }
+      li:after{ content: "!@#$%^&*()_+"}
+      ul li:before{ content: "{res:{res:'korea'}}"; }`),
+      `div { color: red; } * { color: red; font-family: 'Times New Roman'; } li:after{ content: "!@#$%^&*()_+"} ul li:before{ content: "{res:{res:'korea'}}"; }`
+    )
+  })
+
 })

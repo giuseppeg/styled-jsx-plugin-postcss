@@ -26,19 +26,16 @@ function processor(src, options) {
     .then(result => result.css)
 }
 
-function jsonParse(str) {
-  try {
-      return JSON.parse(str);
-  } catch (e) {
-      return str;
-  }
-}
+let input = "";
+process.stdin.on("data", (data) => {
+  input += data.toString();
+});
 
-const args = process.argv.slice(2)
-const src = args[0]
-const options = jsonParse(args[1])
-processor(src, options).then(function(result){
-  console.log(result)
+process.stdin.on("end", () => {
+  const inputData = JSON.parse(input)
+  processor(inputData.css, inputData.settings).then(function(result){
+    process.stdout.write(result)
+  })
 })
 
 // module.exports = processor
