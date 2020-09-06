@@ -1,23 +1,21 @@
-const loopWhile = require('deasync').loopWhile
-const processor = require('./processor')
+
+const { spawnSync } = require('child_process');
+const path = require('path');
 
 module.exports = (css, settings) => {
   const cssWithPlaceholders = css
     .replace(/%%styled-jsx-placeholder-(\d+)%%/g, (_, id) =>
       `/*%%styled-jsx-placeholder-${id}%%*/`
     )
-  let processedCss
-  let wait = true
+  const result = spawnSync("node",[path.resolve(__dirname, "processor.js")],{
+    input: JSON.stringify({
+      css: cssWithPlaceholders,
+      settings
+    }),
+    encoding: "utf8"
+  });
 
-  function resolved(result) {
-    processedCss = result
-    wait = false
-  }
-
-  processor(cssWithPlaceholders, settings)
-    .then(resolved)
-    .catch(resolved)
-  loopWhile(() => wait)
+  processedCss = result.stdout
 
   if (processedCss instanceof Error || processedCss.name === 'CssSyntaxError') {
     throw processedCss

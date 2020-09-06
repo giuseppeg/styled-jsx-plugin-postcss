@@ -6,7 +6,6 @@ let _processor
 
 function processor(src, options) {
   options = options || {}
-
   let loaderPromise
   if (!plugins) {
     loaderPromise = loader(options.env || process.env, options.path, { argv: false })
@@ -27,4 +26,16 @@ function processor(src, options) {
     .then(result => result.css)
 }
 
-module.exports = processor
+let input = "";
+process.stdin.on("data", (data) => {
+  input += data.toString();
+});
+
+process.stdin.on("end", () => {
+  const inputData = JSON.parse(input)
+  processor(inputData.css, inputData.settings).then(function(result){
+    process.stdout.write(result)
+  })
+})
+
+// module.exports = processor
