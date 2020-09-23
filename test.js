@@ -37,6 +37,18 @@ describe('styled-jsx-plugin-postcss', () => {
     )
   })
 
+  it('throws with invalid css', () => {
+    assert.throws(
+      () => {
+        plugin('a {\n  content: "\n}')
+      },
+      {
+        name: 'Error',
+        message: /postcss failed with CssSyntaxError: <css input>:2:12: Unclosed string/,
+      }
+    )
+  })
+
   it('throws with invalid config', () => {
     assert.throws(
       () => {
@@ -46,7 +58,7 @@ describe('styled-jsx-plugin-postcss', () => {
       },
       {
         name: 'Error',
-        message: /postcss failed with/,
+        message: /postcss failed with TypeError: Invalid PostCSS Plugin found: \[0\]/,
       }
     )
   })
