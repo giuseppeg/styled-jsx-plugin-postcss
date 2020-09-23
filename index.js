@@ -16,6 +16,10 @@ module.exports = (css, settings) => {
   });
 
   if (result.stderr) {
+    if (result.stderr.includes('Invalid PostCSS Plugin')) {
+      console.error('Next.js 9 default postcss support uses a non standard postcss config schema https://err.sh/next.js/postcss-shape, you must use the interoperable object-based format instead https://nextjs.org/docs/advanced-features/customizing-postcss-config')
+    }
+
     throw new Error(`postcss failed with ${result.stderr}`)
   }
 
