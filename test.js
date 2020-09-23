@@ -28,7 +28,7 @@ describe('styled-jsx-plugin-postcss', () => {
     )
   })
 
-  it("works with quotes and other characters", () => {
+  it('works with quotes and other characters', () => {
     assert.equal(
       plugin(`@import "./fixture.css"; * { color: red; font-family: 'Times New Roman'; }
       li:after{ content: "!@#$%^&*()_+"}
@@ -44,7 +44,7 @@ describe('styled-jsx-plugin-postcss', () => {
       },
       {
         name: 'Error',
-        message: /postcss failed with CssSyntaxError: <css input>:2:12: Unclosed string/,
+        message: /postcss failed with CssSyntaxError: <css input>:2:12: Unclosed string/
       }
     )
   })
@@ -58,7 +58,7 @@ describe('styled-jsx-plugin-postcss', () => {
       },
       {
         name: 'Error',
-        message: /postcss failed with TypeError: Invalid PostCSS Plugin found: \[0\]/,
+        message: /postcss failed with TypeError: Invalid PostCSS Plugin found: \[0\]/
       }
     )
   })
