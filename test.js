@@ -1,4 +1,5 @@
 const assert = require('assert')
+const path = require('path')
 const plugin = require('./')
 
 describe('styled-jsx-plugin-postcss', () => {
@@ -27,7 +28,7 @@ describe('styled-jsx-plugin-postcss', () => {
     )
   })
 
-  it("works with quotes and other characters", () => {
+  it('works with quotes and other characters', () => {
     assert.equal(
       plugin(`@import "./fixture.css"; * { color: red; font-family: 'Times New Roman'; }
       li:after{ content: "!@#$%^&*()_+"}
@@ -36,4 +37,29 @@ describe('styled-jsx-plugin-postcss', () => {
     )
   })
 
+  it('throws with invalid css', () => {
+    assert.throws(
+      () => {
+        plugin('a {\n  content: "\n}')
+      },
+      {
+        name: 'Error',
+        message: /postcss failed with CssSyntaxError: <css input>:2:12: Unclosed string/
+      }
+    )
+  })
+
+  it('throws with invalid config', () => {
+    assert.throws(
+      () => {
+        plugin('p { color: color-mod(red alpha(90%)); & img { display: block } }', {
+          path: path.resolve('fixture-invalid-config')
+        })
+      },
+      {
+        name: 'Error',
+        message: /postcss failed with TypeError: Invalid PostCSS Plugin found: \[0\]/
+      }
+    )
+  })
 })

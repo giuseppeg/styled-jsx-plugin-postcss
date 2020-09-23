@@ -1,4 +1,3 @@
-
 const { spawnSync } = require('child_process');
 const path = require('path');
 
@@ -7,21 +6,24 @@ module.exports = (css, settings) => {
     .replace(/%%styled-jsx-placeholder-(\d+)%%/g, (_, id) =>
       `/*%%styled-jsx-placeholder-${id}%%*/`
     )
-  const result = spawnSync("node",[path.resolve(__dirname, "processor.js")],{
+
+  const result = spawnSync('node', [path.resolve(__dirname, 'processor.js')], {
     input: JSON.stringify({
       css: cssWithPlaceholders,
       settings
     }),
-    encoding: "utf8"
-  });
+    encoding: 'utf8'
+  })
 
-  processedCss = result.stdout
+  if (result.stderr) {
+    if (result.stderr.includes('Invalid PostCSS Plugin')) {
+      console.error('Next.js 9 default postcss support uses a non standard postcss config schema https://err.sh/next.js/postcss-shape, you must use the interoperable object-based format instead https://nextjs.org/docs/advanced-features/customizing-postcss-config')
+    }
 
-  if (processedCss instanceof Error || processedCss.name === 'CssSyntaxError') {
-    throw processedCss
+    throw new Error(`postcss failed with ${result.stderr}`)
   }
 
-  return processedCss
+  return result.stdout
     .replace(/\/\*%%styled-jsx-placeholder-(\d+)%%\*\//g, (_, id) =>
       `%%styled-jsx-placeholder-${id}%%`
     )
