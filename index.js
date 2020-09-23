@@ -17,7 +17,11 @@ module.exports = (css, settings) => {
 
   processedCss = result.stdout
 
-  if (processedCss instanceof Error || processedCss.name === 'CssSyntaxError') {
+  if (result.stderr) {
+    throw new Error(`postcss failed with ${result.stderr}`)
+  }
+
+  if (processedCss instanceof Error || processedCss.name === 'CssSyntaxError' ) {
     throw processedCss
   }
 

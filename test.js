@@ -1,4 +1,5 @@
 const assert = require('assert')
+const path = require('path')
 const plugin = require('./')
 
 describe('styled-jsx-plugin-postcss', () => {
@@ -36,4 +37,17 @@ describe('styled-jsx-plugin-postcss', () => {
     )
   })
 
+  it('throws with invalid config', () => {
+    assert.throws(
+      () => {
+        plugin('p { color: color-mod(red alpha(90%)); & img { display: block } }', {
+          path: path.resolve('fixture-invalid-config')
+        })
+      },
+      {
+        name: 'Error',
+        message: /postcss failed with/,
+      }
+    )
+  })
 })
