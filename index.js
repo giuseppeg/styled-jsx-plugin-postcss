@@ -1,5 +1,5 @@
-const { spawnSync } = require('child_process');
-const path = require('path');
+const { spawnSync } = require('child_process')
+const path = require('path')
 
 module.exports = (css, settings) => {
   const cssWithPlaceholders = css
@@ -15,7 +15,7 @@ module.exports = (css, settings) => {
     encoding: 'utf8'
   })
 
-  if (result.stderr) {
+  if (result.status !== 0) {
     if (result.stderr.includes('Invalid PostCSS Plugin')) {
       console.error('Next.js 9 default postcss support uses a non standard postcss config schema https://err.sh/next.js/postcss-shape, you must use the interoperable object-based format instead https://nextjs.org/docs/advanced-features/customizing-postcss-config')
     }
