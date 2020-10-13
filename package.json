@@ -1,6 +1,6 @@
 {
   "name": "styled-jsx-plugin-postcss",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "Plugin to add PostCSS support to styled-jsx",
   "main": "index.js",
   "scripts": {
