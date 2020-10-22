@@ -1,36 +1,36 @@
 const assert = require('assert')
 const path = require('path')
-const plugin = require('./')
+const plugin = require('.\/')
 
 describe('styled-jsx-plugin-postcss', () => {
   it('applies browser list and preset-env features', () => {
-    assert.equal(
+    assert.strictEqual(
       plugin('p { color: color-mod(red alpha(90%)); & img { display: block } }'),
       'p { color: rgba(255, 0, 0, 0.9) }\np img { display: block }'
     )
   })
 
   it('applies plugins', () => {
-    assert.equal(plugin('p { background-colour: grey; }'), 'p { background-color: gray; }')
+    assert.strictEqual(plugin('p { background-colour: grey; }'), 'p { background-color: gray; }')
   })
 
   it('works with placeholders', () => {
-    assert.equal(
+    assert.strictEqual(
       plugin('p { color: %%styled-jsx-placeholder-0%%; & img { display: block; } } %%styled-jsx-placeholder-1%%')
       , 'p { color: %%styled-jsx-placeholder-0%% } p img { display: block; } %%styled-jsx-placeholder-1%%'
     )
   })
 
   it('works with @import', () => {
-    assert.equal(
-      plugin('@import "./fixture.css"; p { color: red }'),
+    assert.strictEqual(
+      plugin('@import ".\/fixture.css"; p { color: red }'),
       'div { color: red; } p { color: red }'
     )
   })
 
   it('works with quotes and other characters', () => {
-    assert.equal(
-      plugin(`@import "./fixture.css"; * { color: red; font-family: 'Times New Roman'; }
+    assert.strictEqual(
+      plugin(`@import ".\/fixture.css"; * { color: red; font-family: 'Times New Roman'; }
       li:after{ content: "!@#$%^&*()_+"}
       ul li:before{ content: "{res:{res:'korea'}}"; }`),
       `div { color: red; } * { color: red; font-family: 'Times New Roman'; } li:after{ content: "!@#$%^&*()_+"} ul li:before{ content: "{res:{res:'korea'}}"; }`
@@ -44,7 +44,7 @@ describe('styled-jsx-plugin-postcss', () => {
       },
       {
         name: 'Error',
-        message: /postcss failed with CssSyntaxError: <css input>:2:12: Unclosed string/
+        message: /postcss failed with postcss.plugin was deprecated. Migration guide:\nhttps:\/\/evilmartians.com\/chronicles\/postcss-8-plugin-migration\nCssSyntaxError: <css input>:2:12: Unclosed string\n/
       }
     )
   })
@@ -58,7 +58,7 @@ describe('styled-jsx-plugin-postcss', () => {
       },
       {
         name: 'Error',
-        message: /postcss failed with TypeError: Invalid PostCSS Plugin found: \[0\]/
+        message: /postcss failed with TypeError: Invalid PostCSS Plugin found at: plugins\[0]/
       }
     )
   })

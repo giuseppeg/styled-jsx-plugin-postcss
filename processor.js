@@ -1,5 +1,5 @@
 const postcss = require('postcss')
-const loader = require('postcss-load-plugins')
+const loader = require('postcss-load-config')
 
 let plugins
 let _processor
