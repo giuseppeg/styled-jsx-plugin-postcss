@@ -22,7 +22,6 @@
   },
   "homepage": "https://github.com/giuseppeg/styled-jsx-plugin-postcss#readme",
   "dependencies": {
-    "postcss": "^7.0.2",
     "postcss-load-plugins": "^2.3.0"
   },
   "devDependencies": {
@@ -30,6 +29,10 @@
     "postcss-easy-import": "^3.0.0",
     "postcss-nested": "^4.1.0",
     "postcss-preset-env": "^6.0.10",
-    "postcss-spiffing": "^0.1.0"
+    "postcss-spiffing": "^0.1.0",
+    "postcss": "^7.0.2"
+  },
+  "peerDependencies": {
+    "postcss": "^7.0.2|^8.0.0"
   }
 }
