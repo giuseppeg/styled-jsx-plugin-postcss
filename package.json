@@ -33,6 +33,6 @@
     "postcss-spiffing": "^0.1.0"
   },
   "peerDependencies": {
-    "postcss": "^7.0.2|^8.1.0"
+    "postcss": "^7.0.2 || ^8.1.0"
   }
 }
