@@ -23,7 +23,7 @@ describe('styled-jsx-plugin-postcss', () => {
 
   it('works with @import', () => {
     assert.strictEqual(
-      plugin('@import ".\/fixture.css"; p { color: red }'),
+      plugin('@import "./fixture.css"; p { color: red }'),
       'div { color: red; } p { color: red }'
     )
   })
