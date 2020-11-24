@@ -6,6 +6,8 @@
 Use [PostCSS](https://github.com/postcss/postcss) with
 [styled-jsx](https://github.com/zeit/styled-jsx) 💥
 
+⚠️ **This plugin is not actively being maintained. If you want me to work on it please [consider donating](https://github.com/sponsors/giuseppeg).**
+
 ## Usage
 
 Install this package first.
