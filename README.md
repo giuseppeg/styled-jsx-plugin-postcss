@@ -80,9 +80,9 @@ from version 2. Read more on their repository for further info.
 ## Plugins
 
 `styled-jsx-plugin-postcss` uses
-[`postcss-load-plugins`](https://www.npmjs.com/package/postcss-load-plugins)
+[`postcss-load-config`](https://www.npmjs.com/package/postcss-load-config)
 therefore you may want to refer to their docs to learn more about
-[adding plugins](https://www.npmjs.com/package/postcss-load-plugins#packagejson).
+[adding plugins](https://www.npmjs.com/package/postcss-load-config#packagejson).
 
 ## Contributions
 
