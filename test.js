@@ -1,6 +1,6 @@
 const assert = require('assert')
 const path = require('path')
-const plugin = require('.\/')
+const plugin = require('./')
 
 describe('styled-jsx-plugin-postcss', () => {
   it('applies browser list and preset-env features', () => {
@@ -11,7 +11,7 @@ describe('styled-jsx-plugin-postcss', () => {
   })
 
   it('applies plugins', () => {
-    assert.strictEqual(plugin('p { background-colour: grey; }'), 'p { background-color: gray; }')
+    assert.strictEqual(plugin('p { font-size: calc(2 * 20px); }'), 'p { font-size: 40px; }')
   })
 
   it('works with placeholders', () => {
@@ -30,7 +30,7 @@ describe('styled-jsx-plugin-postcss', () => {
 
   it('works with quotes and other characters', () => {
     assert.strictEqual(
-      plugin(`@import ".\/fixture.css"; * { color: red; font-family: 'Times New Roman'; }
+      plugin(`@import "./fixture.css"; * { color: red; font-family: 'Times New Roman'; }
       li:after{ content: "!@#$%^&*()_+"}
       ul li:before{ content: "{res:{res:'korea'}}"; }`),
       `div { color: red; } * { color: red; font-family: 'Times New Roman'; } li:after{ content: "!@#$%^&*()_+"} ul li:before{ content: "{res:{res:'korea'}}"; }`
@@ -44,7 +44,7 @@ describe('styled-jsx-plugin-postcss', () => {
       },
       {
         name: 'Error',
-        message: /postcss failed with postcss.plugin was deprecated. Migration guide:\nhttps:\/\/evilmartians.com\/chronicles\/postcss-8-plugin-migration\nCssSyntaxError: <css input>:2:12: Unclosed string\n/
+        message: /postcss failed with CssSyntaxError: <css input>:2:12: Unclosed string/
       }
     )
   })
