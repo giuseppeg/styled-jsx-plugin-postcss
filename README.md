@@ -32,24 +32,26 @@ With config:
 ```json
 {
   "plugins": [
-    ["styled-jsx/babel", {
-      "plugins": [
-        [
-          "styled-jsx-plugin-postcss",
-          {
-            "path":
-              "[PATH_PREFIX]/postcss.config.js"
-          }
+    [
+      "styled-jsx/babel",
+      {
+        "plugins": [
+          [
+            "styled-jsx-plugin-postcss",
+            {
+              "path": "[PATH_PREFIX]/postcss.config.js"
+            }
+          ]
         ]
-      ] 
-    }]
+      }
+    ]
   ]
 }
 ```
 
 ### Example with CRA
 
-Usage with Create React App requires you to either _eject_ or use [react-app-rewired](https://github.com/timarney/react-app-rewired). 
+Usage with Create React App requires you to either _eject_ or use [react-app-rewired](https://github.com/timarney/react-app-rewired).
 
 Here is an example using `react-app-rewired`:
 
@@ -57,22 +59,26 @@ Here is an example using `react-app-rewired`:
 // config-overrides.js
 // this file overrides the CRA webpack.config
 
-const { getBabelLoader } = require('react-app-rewired')
+const { getBabelLoader } = require("react-app-rewired");
 
-module.exports = function override (config, env) {
-  const loader = getBabelLoader(config.module.rules)
+module.exports = function override(config, env) {
+  const loader = getBabelLoader(config.module.rules);
 
   // Older versions of webpack have `plugins` on `loader.query` instead of `loader.options`.
-  const options = loader.options || loader.query
-  options.plugins = [['styled-jsx/babel', {
-    'plugins': ['styled-jsx-plugin-postcss']
-  }]].concat(options.plugins || [])
-  return config
-}
+  const options = loader.options || loader.query;
+  options.plugins = [
+    [
+      "styled-jsx/babel",
+      {
+        plugins: ["styled-jsx-plugin-postcss"],
+      },
+    ],
+  ].concat(options.plugins || []);
+  return config;
+};
 ```
 
 _Note: Please follow their instructions on how to set up build & test scripts, and make sure you have a correctly formatted `postcss.config.js` as well_.
-
 
 #### Notes
 
@@ -82,13 +88,13 @@ from version 2. Read more on their repository for further info.
 ## Plugins
 
 `styled-jsx-plugin-postcss` uses
-[`postcss-load-plugins`](https://www.npmjs.com/package/postcss-load-plugins)
+[`postcss-load-config`](https://www.npmjs.com/package/postcss-load-config)
 therefore you may want to refer to their docs to learn more about
-[adding plugins](https://www.npmjs.com/package/postcss-load-plugins#packagejson).
+[adding plugins](https://www.npmjs.com/package/postcss-load-config#packagejson).
 
 ## Contributions
 
-**PRs and contributions are welcome!** 
+**PRs and contributions are welcome!**
 
 We aim to drive development of this plugin through community contributions.
 

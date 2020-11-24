@@ -1,3 +1,3 @@
 module.exports = {
-  plugins: ['mock-plugin']
-}
+  plugins: ["mock-plugin"],
+};

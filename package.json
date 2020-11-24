@@ -1,10 +1,10 @@
 {
   "name": "styled-jsx-plugin-postcss",
-  "version": "3.0.2",
+  "version": "4.0.0",
   "description": "Plugin to add PostCSS support to styled-jsx",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test.js"
+    "test": "mocha --timeout 10000 test.js"
   },
   "repository": {
     "type": "git",
@@ -22,14 +22,17 @@
   },
   "homepage": "https://github.com/giuseppeg/styled-jsx-plugin-postcss#readme",
   "dependencies": {
-    "postcss": "^7.0.2",
-    "postcss-load-plugins": "^2.3.0"
+    "postcss-load-config": "^2.1.2"
   },
   "devDependencies": {
-    "mocha": "^5.2.0",
-    "postcss-easy-import": "^3.0.0",
-    "postcss-nested": "^4.1.0",
-    "postcss-preset-env": "^6.0.10",
-    "postcss-spiffing": "^0.1.0"
+    "mocha": "^8.2.0",
+    "postcss": "^8.1.2",
+    "postcss-calc": "^7.0.5",
+    "postcss-import": "^13.0.0",
+    "postcss-nested": "^5.0.1",
+    "postcss-preset-env": "^6.0.10"
+  },
+  "peerDependencies": {
+    "postcss": "^7.0.2 || ^8.1.0"
   }
 }

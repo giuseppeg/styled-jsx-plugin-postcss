@@ -1,7 +1,12 @@
-const postcss = require('postcss')
+const postcss = require("postcss");
 
-module.exports = postcss.plugin('postcss-fixture', () => (root) => {
-  console.warn('warn')
-  console.error('error')
-  return root
-})
+module.exports = (options = {}) => ({
+  postcssPlugin: "postcss-csso",
+  Once(root, { result, postcss }) {
+    console.warn("warn");
+    console.error("error");
+    return root;
+  },
+});
+
+module.exports.postcss = true;
