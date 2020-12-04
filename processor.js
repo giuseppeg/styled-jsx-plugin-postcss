@@ -4,7 +4,7 @@ const loader = require("postcss-load-config");
 let plugins;
 let _processor;
 
-function processor(src, options) {
+module.exports = function processor(src, options) {
   options = options || {};
   let loaderPromise;
   if (!plugins) {
@@ -25,23 +25,4 @@ function processor(src, options) {
       return _processor.process(src, { from: false });
     })
     .then((result) => result.css);
-}
-
-let input = "";
-process.stdin.on("data", (data) => {
-  input += data.toString();
-});
-
-process.stdin.on("end", () => {
-  const inputData = JSON.parse(input);
-  processor(inputData.css, inputData.settings)
-    .then((result) => {
-      process.stdout.write(result);
-    })
-    .catch((err) => {
-      // NOTE: we console.erorr(err) and then process.exit(1) instead of throwing the error
-      // to avoid the UnhandledPromiseRejectionWarning message.
-      console.error(err);
-      process.exit(1);
-    });
-});
+};
