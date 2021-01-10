@@ -1,6 +1,8 @@
 const assert = require("assert");
 const path = require("path");
+
 const plugin = require("./");
+const { NEXTJS_UNSUPPORTED_FIELD_WARNING } = require("./processor");
 
 describe("styled-jsx-plugin-postcss", () => {
   it("applies browser list and preset-env features", () => {
@@ -71,5 +73,65 @@ describe("styled-jsx-plugin-postcss", () => {
         message: /postcss failed with TypeError: Invalid PostCSS Plugin found at: plugins\[0]/,
       }
     );
+  });
+
+  const scssFixture = `p { color: red; font-family: 'Times New Roman'; }
+  // test postcss-scss
+  h { background: red; }`;
+
+  it("Works with `syntax`", () => {
+    assert.doesNotThrow(() => {
+      plugin(scssFixture, {
+        syntax: "postcss-scss",
+      });
+    });
+  });
+
+  it("Works with `parser`", () => {
+    assert.doesNotThrow(() => {
+      plugin(scssFixture, {
+        parser: "postcss-scss",
+      });
+    });
+  });
+
+  it("Works with `stringifier`", () => {
+    assert.doesNotThrow(() => {
+      plugin(scssFixture, {
+        stringifier: "postcss-scss",
+      });
+    });
+  });
+
+  it("Displays ProcessOptions usage information if encountering NextJS Unsupported Field", () => {
+    const oldWarn = console.warn;
+    let warned = false;
+    console.warn = (msg) => {
+      assert.strictEqual(msg, NEXTJS_UNSUPPORTED_FIELD_WARNING);
+      warned = true;
+    };
+    plugin(scssFixture, {
+      path: path.resolve("fixture-nextjs-warning-info"),
+    });
+    assert(warned);
+    console.warn = oldWarn;
+  });
+
+  it("Only displays a warning when unsupported field is present in postcss.config but not in plugin opts", () => {
+    const oldWarn = console.warn;
+    let warned = false;
+    console.warn = (err) => {
+      if (err === NEXTJS_UNSUPPORTED_FIELD_WARNING) {
+        warned = true;
+      }
+    };
+
+    plugin(scssFixture);
+    plugin(scssFixture, {
+      path: path.resolve("fixture-nextjs-warning-info"),
+      parser: "postcss-scss",
+    });
+    assert(!warned);
+    console.warn = oldWarn;
   });
 });

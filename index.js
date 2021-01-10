@@ -1,7 +1,7 @@
 const { spawnSync } = require("child_process");
 const path = require("path");
 
-module.exports = (css, settings) => {
+module.exports = function styledJsxPostcssPlugin(css, settings = {}) {
   const cssWithPlaceholders = css.replace(
     /%%styled-jsx-placeholder-(\d+)%%/g,
     (_, id) => `/*%%styled-jsx-placeholder-${id}%%*/`
@@ -32,7 +32,13 @@ module.exports = (css, settings) => {
     throw new Error(`postcss failed with ${result.stderr}`);
   }
 
-  return result.stdout.replace(
+  const { css: outputCss, maybeWarning } = JSON.parse(result.stdout);
+
+  if (maybeWarning) {
+    console.warn(maybeWarning);
+  }
+
+  return outputCss.replace(
     /\/\*%%styled-jsx-placeholder-(\d+)%%\*\//g,
     (_, id) => `%%styled-jsx-placeholder-${id}%%`
   );
