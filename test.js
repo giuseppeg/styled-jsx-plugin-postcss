@@ -1,6 +1,8 @@
 const assert = require("assert");
 const path = require("path");
+const fs = require("fs");
 const plugin = require("./");
+const { performance } = require("perf_hooks");
 
 describe("styled-jsx-plugin-postcss", () => {
   it("applies browser list and preset-env features", () => {
@@ -72,4 +74,23 @@ describe("styled-jsx-plugin-postcss", () => {
       }
     );
   });
+
+  it("caches files when cacheDir option is provided", () => {
+    const input = '@import "./fixture.css"; p { color: red }';
+    const expected = "div { color: red; } p { color: red }";
+    const cacheDir = "/tmp/styled-jsx-plugin-postcss";
+
+    let tic = performance.now();
+    assert.strictEqual(plugin(input, { cacheDir }), expected);
+    const firstPassTime = performance.now() - tic;
+
+    tic = performance.now();
+    assert.strictEqual(plugin(input, { cacheDir }), expected);
+    const secondPassTime = performance.now() - tic;
+
+    assert(secondPassTime < firstPassTime / 4);
+
+    // cleanup
+    fs.rmdirSync(cacheDir, { recursive: true });
+  }).timeout(3000);
 });
