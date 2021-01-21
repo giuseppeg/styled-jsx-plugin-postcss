@@ -12,7 +12,7 @@ process.stdin.on("end", () => {
       process.stdout.write(result);
     })
     .catch((err) => {
-      // NOTE: we console.erorr(err) and then process.exit(1) instead of throwing the error
+      // NOTE: we console.error(err) and then process.exit(1) instead of throwing the error
       // to avoid the UnhandledPromiseRejectionWarning message.
       console.error(err);
       process.exit(1);

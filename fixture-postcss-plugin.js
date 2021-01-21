@@ -2,10 +2,12 @@ const postcss = require("postcss");
 
 module.exports = (options = {}) => ({
   postcssPlugin: "postcss-csso",
-  Once(root, { result, postcss }) {
-    console.warn("warn");
-    console.error("error");
-    return root;
+  Rule(rule, { result, postcss }) {
+    rule.selector = rule.selector
+      .split(" ")
+      .map((s) => `${s}.plugin`)
+      .join(" ");
+    return rule;
   },
 });
 

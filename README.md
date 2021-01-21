@@ -39,7 +39,8 @@ With config:
           [
             "styled-jsx-plugin-postcss",
             {
-              "path": "[PATH_PREFIX]/postcss.config.js"
+              "path": "[PATH_PREFIX]/postcss.config.js",
+              "compileEnv": "worker"
             }
           ]
         ]
@@ -48,6 +49,12 @@ With config:
   ]
 }
 ```
+
+## compileEnv
+
+When using Node.js v12.3.0 and above the plugin defaults to compiling using a worker thread instead of a child process. This results in faster builds.
+
+If for any reason you want to force compiling using a child process (slower) you can register the plugin with the config option `compileEnv` set to `process`.
 
 ### Example with CRA
 
