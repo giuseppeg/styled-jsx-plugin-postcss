@@ -30,7 +30,8 @@ function compileWorker(...args) {
     ]);
 
     const workStartedAt = Date.now();
-    const LOCK_TIMEOUT = (args[1] || {}).lockTimeout || 10000;
+    const settings = args[1] || {};
+    const LOCK_TIMEOUT = settings.lockTimeout || 10000;
     Atomics.wait(signal, 0, 0, LOCK_TIMEOUT);
 
     const result = receiveMessageOnPort(subChannel.port2);
@@ -40,7 +41,7 @@ function compileWorker(...args) {
         error(
           `postcss is taking more than ${LOCK_TIMEOUT /
             1000}s to compile the following styles:\n\n` +
-            `Filename: ${(args[1].babel || {}).filename ||
+            `Filename: ${(settings.babel || {}).filename ||
               "unknown filename"}\n\n` +
             args[0]
         );
