@@ -1,6 +1,7 @@
 const assert = require("assert");
 const path = require("path");
 const plugin = require("./");
+const { receiveMessageOnPort } = require("worker_threads");
 
 describe("styled-jsx-plugin-postcss", () => {
   const compileEnvs = ["process", "worker"];
@@ -85,7 +86,10 @@ describe("styled-jsx-plugin-postcss", () => {
         );
       });
 
-      if (compileEnv === "worker") {
+      if (
+        compileEnv === "worker" &&
+        typeof receiveMessageOnPort !== "undefined"
+      ) {
         it("worker mode timeouts after 3s", () => {
           assert.throws(
             () => {
