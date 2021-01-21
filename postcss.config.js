@@ -13,6 +13,6 @@ module.exports = {
       },
     },
     "postcss-calc": {},
-    [path.resolve(__dirname, "./fixture-postcss-plugin.js")]: {},
+    [path.resolve(__dirname, "./fixtures/fixture-postcss-plugin.js")]: {},
   },
 };

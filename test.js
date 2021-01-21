@@ -36,7 +36,9 @@ describe("styled-jsx-plugin-postcss", () => {
 
       it("works with @import", () => {
         assert.strictEqual(
-          plugin('@import "./fixture.css"; p { color: red }', { compileEnv }),
+          plugin('@import "./fixtures/fixture.css"; p { color: red }', {
+            compileEnv,
+          }),
           "div.plugin { color: red; } p.plugin { color: red }"
         );
       });
@@ -44,7 +46,7 @@ describe("styled-jsx-plugin-postcss", () => {
       it("works with quotes and other characters", () => {
         assert.strictEqual(
           plugin(
-            `@import "./fixture.css"; * { color: red; font-family: 'Times New Roman'; }
+            `@import "./fixtures/fixture.css"; * { color: red; font-family: 'Times New Roman'; }
       li:after{ content: "!@#$%^&*()_+"}
       ul li:before{ content: "{res:{res:'korea'}}"; }`,
             { compileEnv }
@@ -71,7 +73,7 @@ describe("styled-jsx-plugin-postcss", () => {
             plugin(
               "p { color: color-mod(red alpha(90%)); & img { display: block } }",
               {
-                path: path.resolve("fixture-invalid-config"),
+                path: path.resolve("./fixtures/fixture-invalid-config"),
                 compileEnv,
               }
             );
@@ -82,6 +84,24 @@ describe("styled-jsx-plugin-postcss", () => {
           }
         );
       });
+
+      if (compileEnv === "worker") {
+        it("worker mode timeouts after 3s", () => {
+          assert.throws(
+            () => {
+              plugin("p { color: red; }", {
+                path: path.resolve("fixtures/timeout"),
+                compileEnv,
+                lockTimeout: 3000,
+              });
+            },
+            {
+              name: "Error",
+              message: /postcss is taking more than/,
+            }
+          );
+        });
+      }
     });
   });
 });

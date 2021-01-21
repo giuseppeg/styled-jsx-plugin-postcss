@@ -1,6 +1,3 @@
 postcss.config.js
 test.js
-fixture.css
-fixture-invalid-config
-fixture-postcss-plugin.js
-postcss.config.js
+fixtures

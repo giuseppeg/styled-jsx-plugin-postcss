@@ -1,4 +1,5 @@
 const compile = require("./compile");
+const error = require("./error");
 
 module.exports = (css, settings) => {
   const cssWithPlaceholders = css.replace(
@@ -9,10 +10,8 @@ module.exports = (css, settings) => {
   const result = compile(cssWithPlaceholders, settings);
 
   if (!result) {
-    throw new Error(
-      `styled-jsx-plugin-postcss did not compile the following CSS:\n\n${css
-        .split("\n")
-        .join("\n\t")}\n`
+    error(
+      `did not compile the following CSS:\n\n${css.split("\n").join("\n\t")}\n`
     );
   }
 
