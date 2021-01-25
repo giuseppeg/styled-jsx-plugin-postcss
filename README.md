@@ -8,6 +8,12 @@ Use [PostCSS](https://github.com/postcss/postcss) with
 
 ⚠️ **This plugin is not actively being maintained. If you want me to work on it please [consider donating](https://github.com/sponsors/giuseppeg).**
 
+## Supporters
+
+Companies and individuals who sponsored some work on this library:
+
+🥇 [@swissredcross](https://github.com/swissredcross)
+
 ## Usage
 
 Install this package first.
