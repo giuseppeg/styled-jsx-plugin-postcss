@@ -15,6 +15,6 @@ module.exports = function processor(src, options) {
   loaderPromises[options.path || 'auto'] = loaderPromise
 
   return loaderPromise
-    .then((plugins) => postcss(plugins).process(src, { from: false }))
+    .then((plugins) => postcss(plugins).process(src, { from: options.babel.filename, map: false }))
     .then((result) => result.css)
 }
