@@ -3,6 +3,9 @@ const loader = require('postcss-load-config')
 
 const loaderPromises = {}
 
+const safeFilenameFromOptions = options =>
+  (options.babel || {}).filename || "unknown filename"
+
 module.exports = function processor(src, options) {
   options = options || {}
 
@@ -15,6 +18,6 @@ module.exports = function processor(src, options) {
   loaderPromises[options.path || 'auto'] = loaderPromise
 
   return loaderPromise
-    .then((plugins) => postcss(plugins).process(src, { from: false }))
+    .then((plugins) => postcss(plugins).process(src, { from: safeFilenameFromOptions(options), map: false }))
     .then((result) => result.css)
 }
